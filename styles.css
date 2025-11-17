@@ -135,9 +135,9 @@ h1 {
   opacity: 0.6;
 }
 
-.quote-author:before {
+/* .quote-author:before {
   content: "— ";
-}
+} */
 
 .star-icon {
   font-size: 32px;
