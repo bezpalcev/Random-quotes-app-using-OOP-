@@ -40,13 +40,14 @@ h1 {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  white-space: nowrap;
 
   transition: background-color 0.4s, color 0.4s, transform 0.4s;
 }
 
 .btn:hover {
   background-color: #0064d0;
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
 }
 
 .btn-danger {
@@ -174,8 +175,16 @@ h1 {
   min-height: 130px;
 }
 
+.fa {
+  margin-left: 5px;
+}
+
 @media (max-width: 400px) {
   .buttons-wrapper {
     flex-direction: column;
+  }
+
+  .quote {
+    max-width: 350px;
   }
 }
