@@ -1,4 +1,5 @@
 import RandomQuote from "./RandomQuote.js";
+import Quote from "./Quote.js";
 
 class RandomQuotesApp {
   constructor() {
@@ -17,47 +18,25 @@ class RandomQuotesApp {
   }
 
   changeCurrentQuote(newQuote) {
-    this.currentQuote = newQuote;
-    this.displayCurrentQuote();
+    if (newQuote instanceof Quote) {
+      this.currentQuote = newQuote;
+      this.displayCurrentQuote();
+    }
   }
 
   getRandomQuote() {
     this.changeCurrentQuote(RandomQuote.getRandomQuote());
   }
 
-  getRandomQuoteViaAPI() {
-    RandomQuote.getRandomQuoteViaAPI().then((quote) =>
-      this.changeCurrentQuote(quote)
-    );
-
-    // блокируем кнопку
-    // this.randomQuoteAPIBtn.disabled = true;
-    // this.randomQuoteAPIBtn.textContent = "Загрузка...";
-
-    // RandomQuote.getRandomQuoteViaAPI()
-    //   .then((quote) => {
-    //     if (quote) {
-    //       this.currentQuote = quote;
-    //       this.displayCurrentQuote();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //     this.quoteTextElement.textContent = "Ошибка загрузки цитаты";
-    //     this.quoteAuthorElement.textContent = "—";
-    //   })
-    //   .finally(() => {
-    //     // возвращаем кнопку в исходное состояние
-    //     this.randomQuoteAPIBtn.disabled = false;
-    //     this.randomQuoteAPIBtn.textContent = "Random quote via API";
-    //   });
+  async getRandomQuoteViaAPI() {
+    const quoteViaAPI = await RandomQuote.getRandomQuoteViaAPI();
+    this.changeCurrentQuote(quoteViaAPI);
   }
 
   init() {
     this.randomQuoteBtn.addEventListener("click", () => this.getRandomQuote());
     this.randomQuoteAPIBtn.addEventListener("click", () => {
       this.getRandomQuoteViaAPI();
-      // this.randomQuoteAPIBtn.textContent = "Загрузка...";
     });
   }
 }
